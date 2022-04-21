@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="calender.css">
+  </head>
+
+  <body>
+
+    <header>
+
+    </header>
+    <main>
+      <div class="main_menu">
+        <img id="user_icon" src="icon_cypress.png" alt="アイコン画像">
+
+        <span id="user_name">test</span>さん
+
+        <ul>
+          <li> <a href="mypage.html">マイページ</a></li>
+          <li><a href="insert_schedule">スケジュール登録</a></li>
+          <li>ログイン</li>
+          <li>ログアウト</li>
+        </ul>
+      </div>
+      <div class="wrapper">
+        <h2>スケジュール管理カレンダー</h2>
+        <h3>
+          <input type="text" id="year" placeholder="2022"> 年<br>
+          <select id="month">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>月のカレンダー
+        </h3>
+        <form action="" method="post">
+          <input type="button" id="prev" value="<<">
+          <input type="button" id="next" value=">>">
+        </form>
+        <form action="" method="post">
+          <table id="calender">
+            <tr id="week">
+              <th>日</th>
+              <th>月</th>
+              <th>火</th>
+              <th>水</th>
+              <th>木</th>
+              <th>金</th>
+              <th>土</th>
+            </tr>
+            <tr id="first_week" class="day_count">
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+            </tr>
+           <tr id="first_week_schedule" class="schedule_area">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td colspan="2">
+               <li>スケジュール3</li>
+              </td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+            <tr id="second_week" class="day_count">
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+            </tr>
+            <tr id="second_week_schedule" class="schedule_area">
+              <td></td>
+              <td></td>
+              <td>
+                <li>スケジュール1</li>
+                <li>スケジュール2</li>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr id="third_week" class="day_count">
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+            </tr>
+            <tr id="third_week_schedule" class="schedule_area">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr id="forth_week" class="day_count">
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td>26</td>
+              <td>27</td>
+              <td>28</td>
+            </tr>
+            <tr id="forth_week_schedule" class="schedule_area">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr id="last_week" class="day_count">
+              <td>29</td>
+              <td>30</td>
+              <td>31</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+            </tr>
+            <tr id="last_week_schedule" class="schedule_area">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+
+      <div class="select_date_infomation">
+        <span id="select_date">1月1日月曜日</span>
+        <div class="select_date_weather_info">
+          本日の天気: <span id="select_date_weather">晴れ</span>
+          気温: <span id="select_date_temperature">5℃</span>
+          降水確率: <span id="select_date_rainy_percent"> 20%</span>
+        </div>
+        <div>
+          <span id="select_date_news">本日のニュース</span>
+        </div>
+        <div class="select_date_schedule">
+          <ul>
+            <li>スケジュール1</li>
+            <li>スケジュール2</li>
+            <li>スケジュール3</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <script src="calender.js"></script>
+  </body>
+
+</html>

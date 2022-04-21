@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>スケジュール登録</h2>
+  <form action="" method="post">
+    タイトル:<input type="text" id="title"><br>
+    内容 :<textarea name="description" id="content" cols="30" rows="10">スケジュール内容</textarea><br>
+    分類 : <select name="kinds" id="kinds">
+      <option value="">分類を選択してください</option>
+      <option value="仕事">仕事</option>
+      <option value="プライベート">プライベート</option>
+      <option value="その他">その他</option>
+    </select><br>
+    終日 :  <input type="checkbox"><br>
+    開始 : <input type="date" name="start_date" id="start_date"> <input type="time" ><br>
+    終了 : <input type="date" name="end_date" id="end_date"> <input type="time" ><br>
+    参加者 : <input type="text" id="address">
+    <select name="member" id="member">
+      <option value="">参加者を選択してください</option>
+    </select>
+     <br>
+    
+    <button type="submit">登録</button>
+    <button type="reset">クリア</button>
+
+
+
+
+
+
+  </form>
+</body>
+</html>

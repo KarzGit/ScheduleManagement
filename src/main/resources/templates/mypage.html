@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="mypage.css">
+</head>
+<body>
+  <div id="mypage">
+    <h4>マイページ</h4>
+    <ol>
+      <li><img  id ="user_icon" src="icon_cypress.png" alt="アイコン画像"></li>
+      <li>ユーザー名: <span>test</span></li>
+      <li>郵便番号: <span>1111111</span></li>
+      <li>メールアドレス: <span>test@co.jp</span></li>
+      <li>パスワード:</li>
+    </ol>
+
+    <button type="submit" id="change_button">変更する</button>
+  </div>
+  <div id="update_mypage">
+    <h4>マイページ編集</h4>
+    アイコン画像:<input type="image" src="" alt="" id="update_icon"><br>
+    ユーザー名: <input type="text" name="" id="update_name"><br>
+    郵便番号: <input type="text" name="update_zipcode"><br>
+    メールアドレス: <input type="text" name="" id="update_mail"><br>
+    パスワード: <input type="password" name="" id="update_password"><br>
+    <div id="confirmation_password">
+      確認用パスワード: <input type="password" id="update_confirmation_password">
+    </div>
+    <button type="submit">更新する</button>
+  </div>
+</body>
+</html>

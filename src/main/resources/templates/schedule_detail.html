@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>スケジュール詳細</h2>
+  <div id="show_detail"></div>
+  <div id="kind"> 分類: <span>仕事</span></div>
+  <div id="title">タイトル: <span>会議</span></div>
+  <div id="description">内容: <span>今日の晩御飯について</span></div>
+  <div id="start_date">開始時間: <span>1/1 10:00</span></div>
+  <div id="end_date">終了時間: <span>1/1 17:00</span></div>
+  <div id="member">参加者: 
+    <span>参加者1</span>
+    <span>参加者2</span>
+  </div>
+  <div>
+    <button type="submit" id="edit">編集</button>
+    <button type="submit" id="delete">削除</button>
+
+  </div>
+  <div id="update_detail">
+    <form action="" method="post">
+      分類: <select name="kind" id="update_kind">
+        <option value="仕事"></option>
+        <option value="プライベート"></option>
+        <option value="その他"></option>
+      </select><br>
+      タイトル: <input type="text" id="update_title"><br>
+      内容: <textarea name="" id="update_description" cols="30" rows="10"></textarea><br>
+      開始時刻: <input type="datetime" name="" id="update_start_date"><br>
+      終了時刻: <input type="datetime" name="" id="update_end_date"><br>
+      参加者: <input type="text" id="update_member"><br>
+      <button type="submit">更新する</button>
+      <button type="submit">削除する</button>
+
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+header {
+  width: 100%;
+  padding: 15px 0;
+  margin: 0 auto;
+  text-align: center;
+
+}
+.wrapper{
+  max-width: 60%;
+  margin:20px;
+ 
+  color: #666;
+  float: left;
+}
+.select_date_infomation{
+  
+  float: right;
+  width: 20%;
+  height: 100%;
+  padding-top: 30px;
+  margin-top: 14%;
+  background-color: aliceblue;
+  
+  
+}
+.infomation{
+  float: right;
+  font-size: 15px;
+
+}
+.main_menu{
+  float: left;
+  width: 15%;
+  height: 200px;
+ 
+  margin-top: 10px;
+  background-color:cadetblue;
+
+}
+#user_icon{
+  width: 40px;
+  height: 40px;
+}
+
+table {
+  text-align: center;
+  border:3px solid #ddd;
+  border-collapse: collapse;
+ 
+
+}
+th {
+  width: 200px;
+  height: 20px;
+  color: #000;
+  outline: 1px solid #ddd;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+
+.day_count td:first-child {
+  color: red;
+}
+/*土曜日*/
+.day_count td:last-child {
+  color: blue;
+}
+.day_count td{
+  border: 1px solid #ddd;
+  border-bottom: none;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  text-align: left;
+  vertical-align: top;
+  height: 5px;
+}
+.schedule_area td{
+  height: 70px;
+  border-right: 1px solid #ddd;
+  border-top: none;
+
+}
+.schedule_area td li{
+  background-color: yellow;
+
+ margin-bottom: 5px;
+}
+
+
+#next{
+  float: right;
+}
+
+#select_date{
+  color: blue;
+  font-size: 25px;
+
+}
