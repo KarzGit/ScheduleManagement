@@ -59,6 +59,12 @@ th {
   text-align: center;
 }
 
+#week :first-child{
+	color:red;
+}
+#week :last-child{
+	color:blue;
+}
 
 .day_count td:first-child {
   color: red;
@@ -75,6 +81,9 @@ th {
   text-align: left;
   vertical-align: top;
   height: 5px;
+}
+.today{
+	background-color:yellow;
 }
 .schedule_area td{
   height: 70px;
