@@ -15,6 +15,7 @@ let schedule_endDate = document.getElementsByClassName("scheduleList_endDate")
 let schedule_endTime = document.getElementsByClassName("scheduleList_endTime")
 let schedule_description = document.getElementsByClassName("scheduleList_description")
 createCalender(year,month)
+showClickDate()
 //今日の日付にclass"today"を追加
 const today=year+'/'+month2+'/'+day
 const todayCheck= document.getElementById(today)
@@ -30,6 +31,7 @@ document.getElementById('prev').addEventListener('click',function(){
             month --
         }
 createCalender(year,month)
+showClickDate()
        
   let tableElement = document.getElementById("calender").querySelectorAll('table')
        
@@ -40,6 +42,7 @@ createCalender(year,month)
 
 	}
 }
+
 
 
     })
@@ -54,6 +57,7 @@ createCalender(year,month)
 		month ++
 	}
 	createCalender(year,month)
+	showClickDate()
 
 	 let tableElement = document.getElementById("calender").querySelectorAll('table')
        
@@ -64,7 +68,7 @@ createCalender(year,month)
 	}
 }
 
-	
+
 })
 
 
@@ -109,7 +113,7 @@ document.getElementById('calender').innerHTML = calenderHtml;
         } else if (dayCount > endDayCount) {
             // 末尾の日数を超えた
              days.appendChild(document.createElement('td'))
-             schedulearea.appendChild(document.createElement('td'))//スケジュール欄の追加
+     	        schedulearea.appendChild(document.createElement('td'))//スケジュール欄の追加
         } else {
 	  		let whileDays=document.createElement('td')
 	  		let schedulebox=document.createElement('td')
@@ -117,8 +121,24 @@ document.getElementById('calender').innerHTML = calenderHtml;
 	  		schedulebox.setAttribute("id",year+'-'+month2+'-'+dayCount)
 	  		//スケジュール開始日が一致するところに<span>を追加
 	  		let scheduleDocument=document.createElement('span')
+	  		scheduleDocument.classList.add('schedule_list')
 	  		for(let i =0; i<schedule_startDate.length; i++){
 			if(schedule_startDate[i].value == schedulebox.getAttribute('id')){
+				//スケジュール期間が複数日に及ぶ場合
+				if(schedule_startDate[i].value != schedule_endDate[i].value){
+					//開始日時
+					let loadDate = new Date(schedule_startDate[i].value);
+					//終了日時
+					let distDate = new Date(schedule_endDate[i].value);
+					/*日時の差をミリ秒単位で取得*/
+					let diffMilliSec = distDate - loadDate;
+					/*ミリ秒を日数に変換*/
+					let diffDays = parseInt(diffMilliSec / 1000 / 60 / 60 / 24);
+					
+					let schedule_period= diffDays+1
+					//日数が1日を超えるスケジュールにcolspanを設定
+					schedulebox.colSpan=schedule_period
+				}
 				scheduleDocument.innerText=schedule_title[i].value　
 				schedulebox.appendChild(scheduleDocument)
 			}
@@ -148,9 +168,9 @@ document.getElementById("yearMonthSelector").addEventListener('click',function()
 	}
 	const selectBox = document.getElementById('month')
 	const month = selectBox.selectedIndex+1
-	
 
 	createCalender(year,month)
+	showClickDate()
 	let tableElement = document.getElementById("calender").querySelectorAll('table')
        
      if(tableElement.length>1){
@@ -161,7 +181,26 @@ document.getElementById("yearMonthSelector").addEventListener('click',function()
 }
 })
 	
-    
-    
+  document.getElementById('select_date').innerHTML=year+'年'+month+'月'+day+'日'
+
+
+	function showClickDate(){
+			//class名schedule_areaを全件取得
+	let trigger =document.getElementsByClassName('schedule_area')
+	//triggerを配列に変換
+	let triggers = Array.from(trigger) ;
+	//配列全てにイベントを追加
+	triggers.forEach(function(target){
+
+		target.addEventListener('click',function(e){
+			const clickDate=new Date(e.target.id);
+			console.log(clickDate.getMonth())
+			document.getElementById('select_date').innerHTML=clickDate.getFullYear()+'年'+(clickDate.getMonth()+1)+'月'+clickDate.getDate()+'日'
+			console.log(e)
+		})
+	})
+
+
+};
 
 
