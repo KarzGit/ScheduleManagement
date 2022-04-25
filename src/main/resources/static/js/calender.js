@@ -98,7 +98,10 @@ document.getElementById('calender').innerHTML = calenderHtml;
     const startDay = startDate.getDay() // 月の最初の日の曜日を取得
     let dayCount = 1 // 日にちのカウント
     
-  for (let w = 0; w < 6; w++) {
+	let diffMilliSec = endDate - startDate;
+					/*ミリ秒を日数に変換*/
+	let monthlyDays = parseInt(diffMilliSec / 1000 / 60 / 60 / 24);
+  for (let w = 0; w <monthlyDays/7 ; w++) {
   
     let days=document.createElement('tr')
     days.classList.add('day_count')
@@ -121,7 +124,7 @@ document.getElementById('calender').innerHTML = calenderHtml;
 	  		schedulebox.setAttribute("id",year+'-'+month2+'-'+dayCount)
 	  		//スケジュール開始日が一致するところに<span>を追加
 	  		let scheduleDocument=document.createElement('span')
-	  		scheduleDocument.classList.add('schedule_list')
+	  		
 	  		for(let i =0; i<schedule_startDate.length; i++){
 			if(schedule_startDate[i].value == schedulebox.getAttribute('id')){
 				//スケジュール期間が複数日に及ぶ場合
@@ -130,15 +133,16 @@ document.getElementById('calender').innerHTML = calenderHtml;
 					let loadDate = new Date(schedule_startDate[i].value);
 					//終了日時
 					let distDate = new Date(schedule_endDate[i].value);
-					/*日時の差をミリ秒単位で取得*/
+					//日時の差をミリ秒単位で取得
 					let diffMilliSec = distDate - loadDate;
-					/*ミリ秒を日数に変換*/
+					//ミリ秒を日数に変換
 					let diffDays = parseInt(diffMilliSec / 1000 / 60 / 60 / 24);
 					
 					let schedule_period= diffDays+1
-					//日数が1日を超えるスケジュールにcolspanを設定
-					schedulebox.colSpan=schedule_period
+					scheduleDocument.style.width='300px';
+					
 				}
+				scheduleDocument.classList.add('schedule_list')
 				scheduleDocument.innerText=schedule_title[i].value　
 				schedulebox.appendChild(scheduleDocument)
 			}

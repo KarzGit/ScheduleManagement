@@ -93,8 +93,17 @@ th {
 }
 
 
-.schedule_list{
-	background-color:cyan;
+.schedule_list{	
+  display:inline-block;
+  position: relative;
+  left:3px;
+  z-index:100;
+  
+  color:white;
+  background-color :cyan;
+  margin-bottom:1px;
+  height:25px;
+  line-height:25px;
 }
 
 
