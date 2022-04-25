@@ -12,7 +12,12 @@
 <body>
 
 	<header>
-		<input type="hidden" class="scheduleList" th:each="schedule:${scheduleList}" th:value="${schedule}">
+		<input type="hidden" class="scheduleList_title" th:each="schedule:${scheduleList}" th:value="${schedule.title}">
+		<input type="hidden" class="scheduleList_startDate" th:each="schedule:${scheduleList}" th:value="${schedule.startDate}">
+		<input type="hidden" class="scheduleList_startTime" th:each="schedule:${scheduleList}" th:value="${schedule.startTime}">
+		<input type="hidden" class="scheduleList_endDate" th:each="schedule:${scheduleList}" th:value="${schedule.endDate}">
+		<input type="hidden" class="scheduleList_endTime" th:each="schedule:${scheduleList}" th:value="${schedule.endTime}">
+		<input type="hidden" class="scheduleList_description" th:each="schedule:${scheduleList}" th:value="${schedule.description}">
 	 </header>
 	<main>
 		<div class="main_menu">
@@ -173,8 +178,8 @@
 			<div>
 				<span id="select_date_news">本日のニュース</span>
 			</div>
-			<div class="select_date_schedule">
-				<ul>
+			<div >
+				<ul class="select_date_schedule">
 					<li>スケジュール1</li>
 					<li>スケジュール2</li>
 					<li>スケジュール3</li>

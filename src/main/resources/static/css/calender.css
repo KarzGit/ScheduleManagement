@@ -83,7 +83,7 @@ th {
   height: 5px;
 }
 .today{
-	background-color:yellow;
+	background-color:aquamarine;
 }
 .schedule_area td{
   height: 70px;
@@ -91,10 +91,10 @@ th {
   border-top: none;
 
 }
-.schedule_area td li{
-  background-color: yellow;
 
- margin-bottom: 5px;
+
+.schedule_list{
+	background-color:cyan;
 }
 
 

@@ -28,8 +28,8 @@ public class ScheduleRepository {
 		schedule.setKinds(rs.getString("kinds"));
 		schedule.setStartDate(rs.getDate("start_date"));
 		schedule.setStartTime(rs.getTime("start_time"));
-		schedule.setStartDate(rs.getDate("end_date"));
-		schedule.setStartTime(rs.getTime("end_time"));
+		schedule.setEndDate(rs.getDate("end_date"));
+		schedule.setEndTime(rs.getTime("end_time"));
 		return schedule;
 
 	};
