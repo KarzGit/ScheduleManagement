@@ -65,4 +65,20 @@ public class ScheduleRepository {
 		return scheduleId;
 	}
 
+	public Schedule load(Integer id) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT ");
+		sql.append("id, user_id, title, description, kinds, start_date, start_time, end_date, end_time ");
+		sql.append("FROM ");
+		sql.append("schedules ");
+		sql.append("WHERE ");
+		sql.append("id=:id ");
+
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+
+		Schedule schedule = template.queryForObject(sql.toString(), param, SCHEDULE_ROW_MAPPER);
+
+		return schedule;
+	}
+
 }
