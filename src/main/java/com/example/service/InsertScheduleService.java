@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.domain.Schedule;
 import com.example.domain.Share;
+import com.example.repository.ScheduleRepository;
 import com.example.repository.ShareRepository;
 import com.example.repository.UserRepository;
 
@@ -24,6 +26,13 @@ public class InsertScheduleService {
 
 	public void insertShare(Share share) {
 		shareRepository.insert(share);
+	}
+
+	@Autowired
+	private ScheduleRepository scheduleRepository;
+
+	public Integer insertSchedule(Schedule schedule) {
+		return scheduleRepository.insert(schedule);
 	}
 
 }

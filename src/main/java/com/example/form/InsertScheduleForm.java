@@ -1,24 +1,22 @@
 package com.example.form;
 
+import javax.validation.constraints.NotBlank;
+
 public class InsertScheduleForm {
 
-	private String userId;
+	@NotBlank(message = "タイトルを入力してください")
 	private String title;
 	private String description;
 	private String kinds;
+	@NotBlank(message = "開始日を入力してください")
 	private String startDate;
+	@NotBlank(message = "開始時刻を入力してください")
 	private String startTime;
+	@NotBlank(message = "終了日を入力してください")
 	private String endDate;
+	@NotBlank(message = "終了時刻を入力してください")
 	private String endTime;
 	private String memberMail;
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	public String getTitle() {
 		return title;
@@ -86,9 +84,9 @@ public class InsertScheduleForm {
 
 	@Override
 	public String toString() {
-		return "InsertScheduleForm [userId=" + userId + ", title=" + title + ", description=" + description + ", kinds="
-				+ kinds + ", startDate=" + startDate + ", startTime=" + startTime + ", endDate=" + endDate
-				+ ", endTime=" + endTime + ", memberMail=" + memberMail + "]";
+		return "InsertScheduleForm [title=" + title + ", description=" + description + ", kinds=" + kinds
+				+ ", startDate=" + startDate + ", startTime=" + startTime + ", endDate=" + endDate + ", endTime="
+				+ endTime + ", memberMail=" + memberMail + "]";
 	}
 
 }
