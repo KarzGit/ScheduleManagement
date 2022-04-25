@@ -139,12 +139,13 @@ document.getElementById('calender').innerHTML = calenderHtml;
 					let diffDays = parseInt(diffMilliSec / 1000 / 60 / 60 / 24);
 					
 					let schedule_period= diffDays+1
-					scheduleDocument.style.width='300px';
+					scheduleDocument.style.width=160*schedule_period+'px';
 					
 				}
 				scheduleDocument.classList.add('schedule_list')
 				scheduleDocument.innerText=schedule_title[i].value　
 				schedulebox.appendChild(scheduleDocument)
+				
 			}
 	}
 	  		whileDays.append(dayCount)
