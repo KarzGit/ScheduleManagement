@@ -45,7 +45,7 @@ public class UserRepository {
 	}
 
 	/**
-	 * メール重複チェック
+	 * メール検索
 	 * 
 	 * @param mail
 	 * @return id or null

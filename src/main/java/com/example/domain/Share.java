@@ -1,6 +1,6 @@
 package com.example.domain;
 
-public class share {
+public class Share {
 	private Integer parentUserId;
 	private Integer sharedUserId;
 	private Integer scheduleId;
