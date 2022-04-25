@@ -43,7 +43,7 @@ public class CalenderController {
 			latlonUrl.append("http://api.openweathermap.org/geo/1.0/zip?zip=");
 			latlonUrl.append(user.getZipcode());
 			latlonUrl.append(",jp&appid=");
-			latlonUrl.append("471af3d6245636e5a857d198a61d5389"); // OpenWeatherMapのAPIキー
+			latlonUrl.append(""); // OpenWeatherMapのAPIキー
 
 			URL preUrl = new URL(latlonUrl.toString());
 			JsonNode latlonDocument = latlonMapper.readTree(preUrl);
@@ -60,7 +60,7 @@ public class CalenderController {
 			weatherUrl.append("&lon=");
 			weatherUrl.append(weatherMap.getLon());
 			weatherUrl.append("&appid=");
-			weatherUrl.append("471af3d6245636e5a857d198a61d5389");
+			weatherUrl.append("");
 			weatherUrl.append("&lang=ja&units=metric");
 
 			URL url = new URL(weatherUrl.toString());
