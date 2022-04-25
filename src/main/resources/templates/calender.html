@@ -2,35 +2,42 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>スケジュール登録/カレンダー表示</title>
-<link rel="stylesheet" th:href="@{/css/calender.css}">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>スケジュール登録/カレンダー</title>
+	<link rel="stylesheet" th:href="@{/css/calender.css}">
 </head>
 
 <body>
 
 	<header>
 		<input type="hidden" class="scheduleList_title" th:each="schedule:${scheduleList}" th:value="${schedule.title}">
-		<input type="hidden" class="scheduleList_startDate" th:each="schedule:${scheduleList}" th:value="${schedule.startDate}">
-		<input type="hidden" class="scheduleList_startTime" th:each="schedule:${scheduleList}" th:value="${schedule.startTime}">
-		<input type="hidden" class="scheduleList_endDate" th:each="schedule:${scheduleList}" th:value="${schedule.endDate}">
-		<input type="hidden" class="scheduleList_endTime" th:each="schedule:${scheduleList}" th:value="${schedule.endTime}">
-		<input type="hidden" class="scheduleList_description" th:each="schedule:${scheduleList}" th:value="${schedule.description}">
-	 </header>
+		<input type="hidden" class="scheduleList_startDate" th:each="schedule:${scheduleList}"
+			th:value="${schedule.startDate}">
+		<input type="hidden" class="scheduleList_startTime" th:each="schedule:${scheduleList}"
+			th:value="${schedule.startTime}">
+		<input type="hidden" class="scheduleList_endDate" th:each="schedule:${scheduleList}"
+			th:value="${schedule.endDate}">
+		<input type="hidden" class="scheduleList_endTime" th:each="schedule:${scheduleList}"
+			th:value="${schedule.endTime}">
+		<input type="hidden" class="scheduleList_description" th:each="schedule:${scheduleList}"
+			th:value="${schedule.description}">
+	</header>
 	<main>
 		<div class="main_menu">
-			<img id="user_icon" src="icon_cypress.png" alt="アイコン画像"> <span
-				id="user_name" th:if="${session.user != null}"
-				th:text="${session.user.name}">test</span>さん
-
-			<ul>
-				<li><a href="mypage.html">マイページ</a></li>
-				<li><a href="insert_schedule">スケジュール登録</a></li>
-				<li>ログイン</li>
-				<li>ログアウト</li>
-			</ul>
+			<th:block th:if="${session.existUser}">
+				<img id="user_icon" th:src="@{/img/}+${session.user.iconImagePath}" alt="アイコン画像"> <span id="user_name"
+					th:text="${session.user.name}">test</span>さん
+				<ul>
+					<li><a th:href="@{/myPage}">マイページ</a></li>
+					<li><a th:href="@{/insertSchedule}">スケジュール登録</a></li>
+					<li><a th:href="@{/logout}">ログアウト</a></li>
+				</ul>
+			</th:block>
+			<th:block th:unless="${session.existUser}">
+				<a th:href="@{/login}">ログイン</a>
+			</th:block>
 		</div>
 		<div class="wrapper">
 			<h2>スケジュール管理カレンダー</h2>
@@ -53,8 +60,7 @@
 				<button id="yearMonthSelector">表示する</button>
 			</h3>
 			<form action="" method="post">
-				<input type="button" id="prev" value="<<"> <input
-					type="button" id="next" value=">>">
+				<input type="button" id="prev" value="<<"> <input type="button" id="next" value=">>">
 			</form>
 			<form action="" method="post">
 				<div id="calender"></div>
@@ -170,15 +176,16 @@
 
 		<div class="select_date_infomation">
 			<span id="select_date">1月1日月曜日</span>
-			<div class="select_date_weather_info">
-				本日の天気: <span id="select_date_weather">晴れ</span> 気温: <span
-					id="select_date_temperature">5℃</span> 降水確率: <span
-					id="select_date_rainy_percent"> 20%</span>
-			</div>
+			<th:block th:if="${weather}">
+				<div class="select_date_weather_info">
+					本日の天気:<img th:src="@{http://openweathermap.org/img/wn/}+${weatherMap.weatherIconPath}"></img><span
+						th:text="${weatherMap.weather}">晴れ</span> 気温: <span th:text="${weatherMap.temp}">5℃</span>
+				</div>
+			</th:block>
 			<div>
 				<span id="select_date_news">本日のニュース</span>
 			</div>
-			<div >
+			<div>
 				<ul class="select_date_schedule">
 					<li>スケジュール1</li>
 					<li>スケジュール2</li>
@@ -187,7 +194,7 @@
 			</div>
 		</div>
 	</main>
-	<script th:src="@{/js/calender.js}" ></script>
+	<script th:src="@{/js/calender.js}"></script>
 </body>
 
 </html>
