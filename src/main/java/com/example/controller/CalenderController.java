@@ -25,7 +25,7 @@ public class CalenderController {
 	private CalenderService calenderService;
 	
 	
-	@GetMapping("showCalender")
+	@GetMapping("/showCalender")
 	public String  showCalender(Model model) {
 		if(session.getAttribute("user") != null) {
 			List<Schedule> scheduleList = calenderService.findByUserId(((User)session.getAttribute("user")).getId());

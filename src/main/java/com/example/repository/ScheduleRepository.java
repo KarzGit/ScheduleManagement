@@ -43,7 +43,7 @@ public class ScheduleRepository {
 		sql.append("WHERE ");
 		sql.append("user_id=:userId ");
 		sql.append("OR ");
-		sql.append("id= ");
+		sql.append("id IN");
 		sql.append("(SELECT schedule_id FROM share WHERE shared_user_id = :userId);");
 		String Sql = sql.toString();
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
