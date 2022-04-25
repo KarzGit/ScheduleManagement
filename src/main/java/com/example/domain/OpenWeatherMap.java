@@ -1,7 +1,6 @@
 package com.example.domain;
 
 public class OpenWeatherMap {
-	
 	private Double lat;
 	private Double lon;
 	private Integer temp;
