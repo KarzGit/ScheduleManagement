@@ -15,6 +15,8 @@ let schedule_startTime = document.getElementsByClassName("scheduleList_startTime
 let schedule_endDate = document.getElementsByClassName("scheduleList_endDate")
 let schedule_endTime = document.getElementsByClassName("scheduleList_endTime")
 let schedule_description = document.getElementsByClassName("scheduleList_description")
+const selectBox = document.getElementById('month')
+selectBox[date.getMonth()].selected="true";
 createCalender(year,month)
 showClickDate()
 //今日の日付にclass"today"を追加
@@ -33,7 +35,8 @@ document.getElementById('prev').addEventListener('click',function(){
         }
 createCalender(year,month)
 showClickDate()
-       
+selectBox[month-1].selected="true"
+document.getElementById('year').placeholder=year
   let tableElement = document.getElementById("calender").querySelectorAll('table')
        
      if(tableElement.length>1){
@@ -51,6 +54,7 @@ showClickDate()
      
  document.getElementById("next").addEventListener('click',function(){
 	document.getElementById('calender').innerHTML = ' ';
+	
 	if(month == 12){
 		month = 1
 		year ++
@@ -59,7 +63,9 @@ showClickDate()
 	}
 	createCalender(year,month)
 	showClickDate()
-
+	selectBox[month-1].selected="true"
+	document.getElementById('year').placeholder=year
+	
 	 let tableElement = document.getElementById("calender").querySelectorAll('table')
        
      if(tableElement.length>1){
@@ -177,7 +183,7 @@ document.getElementById("yearMonthSelector").addEventListener('click',function()
 	}else{
 	year = document.getElementById('year').value
 	}
-	const selectBox = document.getElementById('month')
+
 	const month = selectBox.selectedIndex+1
 
 	createCalender(year,month)
