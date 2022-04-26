@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,9 @@ public class ScheduleRepository {
 		sql.append("user_id=:userId ");
 		sql.append("OR ");
 		sql.append("id IN");
-		sql.append("(SELECT schedule_id FROM share WHERE shared_user_id = :userId);");
+		sql.append("(SELECT schedule_id FROM share WHERE shared_user_id = :userId) ");
+		sql.append("AND ");
+		sql.append("deleted = null ");
 		String Sql = sql.toString();
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
 		return template.query(Sql, param, SCHEDULE_ROW_MAPPER);
@@ -77,8 +80,41 @@ public class ScheduleRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 
 		Schedule schedule = template.queryForObject(sql.toString(), param, SCHEDULE_ROW_MAPPER);
-
+		
 		return schedule;
+	}
+	
+	public void update(Schedule schedule) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE " );
+		sql.append("Schedules ");
+		sql.append("SET ");
+		sql.append("title=:title, description=:description,kinds=:kinds,start_date=:startDate,start_time=:startTime, ");
+		sql.append("end_date=:endDate, end_time=:endTime ");
+		sql.append("WHERE ");
+		sql.append("id=:id;");
+		
+		SqlParameterSource param= new MapSqlParameterSource().addValue("title", schedule.getTitle()).addValue("description", schedule.getDescription())
+				.addValue("kinds", schedule.getKinds()).addValue("startDate",schedule.getStartDate()).addValue("startTime", schedule.getStartTime())
+				.addValue("endDate", schedule.getEndDate()).addValue("endTime", schedule.getEndTime()).addValue("id",schedule.getId());
+		
+		template.update(sql.toString(),param);
+		
+		
+	}
+	
+	public void deletedUpdate(Integer id) {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		System.out.println(timestamp);
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE ");
+		sql.append("schedules ");
+		sql.append("SET ");
+		sql.append("deleted=:deleted ");
+		sql.append("WHERE ");
+		sql.append("id=:id");
+		SqlParameterSource param = new MapSqlParameterSource().addValue("deleted", timestamp).addValue("id", id);
+		template.update(sql.toString(),param);
 	}
 
 }

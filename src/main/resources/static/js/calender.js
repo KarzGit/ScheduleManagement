@@ -8,6 +8,7 @@ let month2= ('00'+month).slice(-2) //一桁の数字に0を追加　1→01
 let day = date.getDate()
 let dayCount = 1 // 日にちのカウント
 let calenderHtml = '' // HTMLを組み立てる変数
+let schedule_id = document.getElementsByClassName("scheduleList_id")
 let schedule_title = document.getElementsByClassName("scheduleList_title")
 let schedule_startDate = document.getElementsByClassName("scheduleList_startDate")
 let schedule_startTime = document.getElementsByClassName("scheduleList_startTime")
@@ -74,7 +75,7 @@ showClickDate()
 
 //カレンダーを表示するメソッド
 function createCalender(year,month){
-	 month2= ('00'+month).slice(-2) //一桁の数字に0を追加　1→01
+month2= ('00'+month).slice(-2) //一桁の数字に0を追加　1→01
 document.getElementById('calender').innerHTML = ' ';
 
 calenderHtml += '<table>'
@@ -116,7 +117,7 @@ document.getElementById('calender').innerHTML = calenderHtml;
         } else if (dayCount > endDayCount) {
             // 末尾の日数を超えた
              days.appendChild(document.createElement('td'))
-     	        schedulearea.appendChild(document.createElement('td'))//スケジュール欄の追加
+     	     schedulearea.appendChild(document.createElement('td'))//スケジュール欄の追加
         } else {
 	  		let whileDays=document.createElement('td')
 	  		let schedulebox=document.createElement('td')
@@ -142,9 +143,14 @@ document.getElementById('calender').innerHTML = calenderHtml;
 					scheduleDocument.style.width=160*schedule_period+'px';
 					
 				}
+				
+				let scheduleLink = document.createElement('a')
+				scheduleLink.href="http://localhost:8080/scheduleDetail?id="+schedule_id[i].value
+				schedulebox.appendChild(scheduleLink)
 				scheduleDocument.classList.add('schedule_list')
 				scheduleDocument.innerText=schedule_title[i].value　
-				schedulebox.appendChild(scheduleDocument)
+				schedulebox.firstElementChild.appendChild(scheduleDocument)
+				
 				
 			}
 	}

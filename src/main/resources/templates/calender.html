@@ -12,6 +12,7 @@
 <body>
 
 	<header>
+		<input type="hidden" class="scheduleList_id" th:each="schedule:${scheduleList}" th:value="${schedule.id}">
 		<input type="hidden" class="scheduleList_title" th:each="schedule:${scheduleList}" th:value="${schedule.title}">
 		<input type="hidden" class="scheduleList_startDate" th:each="schedule:${scheduleList}"
 			th:value="${schedule.startDate}">
