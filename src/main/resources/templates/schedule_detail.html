@@ -21,11 +21,12 @@
   </div>
   <div>
     <button type="submit" id="edit">編集</button>
+    <a th:href="@{/calender}">カレンダーに戻る</a>
 
   </div>
   </div>
   <div id="update_detail" style="position:absolute">
-    <form th:action="@{/register/update?id=}+${schedule.id}" th:object="${updateScheduleForm}" method="post">
+    <form th:action="@{/update?id=}+${schedule.id}" th:object="${updateScheduleForm}" method="post">
       分類: <select name="kinds" id="update_kind" th:value="${schedule.kinds}" >
         <option value="仕事">仕事</option>
         <option value="プライベート">プライベート</option>
@@ -43,7 +44,7 @@
       <button type="submit" id="update">更新する</button>
      
     </form>
-    <form th:action="@{/scheduleDetail/deletedUpdate?id}+${schedule.id}" method="post">
+    <form th:action="@{/update/deletedUpdate?id}+${schedule.id}" method="post">
      <button type="submit" id="delete">削除する</button>
     </form>
   </div>
