@@ -60,7 +60,7 @@ public class CalenderController {
 			weatherUrl.append("&lon=");
 			weatherUrl.append(weatherMap.getLon());
 			weatherUrl.append("&appid=");
-			weatherUrl.append("");
+			weatherUrl.append(""); // OpenWeatherMapのAPIキー
 			weatherUrl.append("&lang=ja&units=metric");
 
 			URL url = new URL(weatherUrl.toString());
