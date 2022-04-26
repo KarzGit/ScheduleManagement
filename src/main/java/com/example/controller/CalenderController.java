@@ -25,16 +25,15 @@ public class CalenderController {
 	private CalenderService calenderService;
 	
 	
-	@GetMapping("/showCalender")
+	@GetMapping("")
 	public String  showCalender(Model model) {
 		if(session.getAttribute("user") != null) {
 			List<Schedule> scheduleList = calenderService.findByUserId(((User)session.getAttribute("user")).getId());
 			model.addAttribute("scheduleList",scheduleList);
 			
 		}
-		//仮でUserId=2のユーザーのスケジュールを取得
-		List<Schedule> scheduleList = calenderService.findByUserId(2);
-		model.addAttribute("scheduleList",scheduleList);
+		
+		
 	
 		
 		return "calender.html";

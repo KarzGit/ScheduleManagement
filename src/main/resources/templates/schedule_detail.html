@@ -7,8 +7,9 @@
   <title>Document</title>
 </head>
 <body>
+ <div id="show_detail">
   <h2>スケジュール詳細</h2>
-  <div id="show_detail"></div>
+ 
   <div id="kind"> 分類: <span th:text="${schedule.kinds}">仕事</span></div>
   <div id="title">タイトル: <span th:text="${schedule.title}">会議</span></div>
   <div id="description">内容: <span th:text="${schedule.description}">今日の晩御飯について</span></div>
@@ -20,25 +21,32 @@
   </div>
   <div>
     <button type="submit" id="edit">編集</button>
-    <button type="submit" id="delete">削除</button>
 
   </div>
-  <div id="update_detail">
-    <form action="" method="post">
-      分類: <select name="kind" id="update_kind">
-        <option value="仕事"></option>
-        <option value="プライベート"></option>
-        <option value="その他"></option>
+  </div>
+  <div id="update_detail" style="position:absolute">
+    <form th:action="@{/register/update?id=}+${schedule.id}" th:object="${updateScheduleForm}" method="post">
+      分類: <select name="kinds" id="update_kind" th:value="${schedule.kinds}" >
+        <option value="仕事">仕事</option>
+        <option value="プライベート">プライベート</option>
+        <option value="その他">その他</option>
       </select><br>
-      タイトル: <input type="text" id="update_title"><br>
-      内容: <textarea name="" id="update_description" cols="30" rows="10"></textarea><br>
-      開始時刻: <input type="datetime" name="" id="update_start_date"><br>
-      終了時刻: <input type="datetime" name="" id="update_end_date"><br>
+      <div id="titleError" style="display:none; color:red">タイトルを入力してください</div>
+      タイトル: <input type="text" id="update_title"  name="title" th:value="${schedule.title}"><br>
+      内容: <textarea name="description" id="update_description" cols="30" rows="10" th:text="${schedule.description}"></textarea><br>
+      <div id="datetimeError" style="display:none; color:red">終了日時は開始日時以降の日時を入力してください</div>
+      開始時刻: <input type="date" name="startDate" id="update_start_date" th:value="${schedule.startDate}" >
+      <input type="time" id="update_start_time" name="startTime" th:value="${schedule.startTime}"><br>
+      終了時刻: <input type="date" name="endDate" id="update_end_date" th:value="${schedule.endDate}">
+      <input type="time" id="update_end_time"  name="endTime" th:value="${schedule.endTime}" ><br>
       参加者: <input type="text" id="update_member"><br>
-      <button type="submit">更新する</button>
-      <button type="submit">削除する</button>
-
+      <button type="submit" id="update">更新する</button>
+     
+    </form>
+    <form th:action="@{/scheduleDetail/deletedUpdate?id}+${schedule.id}" method="post">
+     <button type="submit" id="delete">削除する</button>
     </form>
   </div>
+  <script th:src="@{/js/schedule_detail.js}" ></script>
 </body>
 </html>
