@@ -9,7 +9,7 @@
 <body>
 
  <h2>ユーザー登録</h2>
-  <form th:action="@{/register/insert}" method="post" th:object="${registerForm}">
+  <form th:action="@{/register/insert}" method="post" th:object="${registerForm}" enctype="multipart/form-data">
     <div th:errors="*{name}" style="color: red;"></div>
     ユーザー名: <input type="text" th:field="*{name}"><br>
     <div th:errors="*{mail}" style="color: red;"></div>
@@ -21,7 +21,7 @@
     確認用パスワード: <input type="password" th:field="*{confirmPassword}"><br>
     <div th:errors="*{zipcode}" style="color: red;"></div>
     郵便番号: <input type="text" th:field="*{zipcode}"><br>
-    アイコン画像: <input type="file" name="iconImagePath"><br>
+    アイコン画像: <input type="file" name="iconImagePath" accept=".jpg,.png,image/jpeg,image/png"><br>
     通知: <input type="radio" name="mailNotification" value="1" checked>受け取る
     <input type="radio" name="mailNotification" value="0" id="">受け取らない<br>
     <button id="subBtn">登録</button>

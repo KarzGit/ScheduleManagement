@@ -5,21 +5,23 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class RegisterForm {
-	
+
 	@NotBlank(message = "名前を入力してください")
 	private String name;
 	@NotBlank(message = "メールアドレスを入力してください")
-	@Email(message="メールアドレスの形式が不正です")
+	@Email(message = "メールアドレスの形式が不正です")
 	private String mail;
-	@NotBlank(message="パスワードを入力して下さい")
-	@Size(min=8, max=16, message="パスワードは８文字以上１６文字以内で設定してください")
+	@NotBlank(message = "パスワードを入力して下さい")
+	@Size(min = 8, max = 16, message = "パスワードは８文字以上１６文字以内で設定してください")
 	private String password;
 	private String confirmPassword;
-	@NotBlank(message="郵便番号を入力して下さい")
-	@Pattern(regexp="^[0-9]{7}$", message="郵便番号はXXX-XXXXの形式で入力してください")
+	@NotBlank(message = "郵便番号を入力して下さい")
+	@Pattern(regexp = "^[0-9]{7}$", message = "郵便番号はXXX-XXXXの形式で入力してください")
 	private String zipcode;
-	private String iconImagePath;
+	private MultipartFile iconImageFile;
 	private String mailNotification;
 
 	public String getName() {
@@ -62,12 +64,12 @@ public class RegisterForm {
 		this.zipcode = zipcode;
 	}
 
-	public String getIconImagePath() {
-		return iconImagePath;
+	public MultipartFile getIconImageFile() {
+		return iconImageFile;
 	}
 
-	public void setIconImagePath(String iconImagePath) {
-		this.iconImagePath = iconImagePath;
+	public void setIconImagePath(MultipartFile iconImageFile) {
+		this.iconImageFile = iconImageFile;
 	}
 
 	public String getMailNotification() {
@@ -81,7 +83,7 @@ public class RegisterForm {
 	@Override
 	public String toString() {
 		return "RegisterForm [name=" + name + ", mail=" + mail + ", password=" + password + ", confirmPassword="
-				+ confirmPassword + ", zipcode=" + zipcode + ", iconImagePath=" + iconImagePath + ", mailNotification="
+				+ confirmPassword + ", zipcode=" + zipcode + ", iconImageFile=" + iconImageFile + ", mailNotification="
 				+ mailNotification + "]";
 	}
 
