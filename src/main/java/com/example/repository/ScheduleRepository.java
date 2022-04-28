@@ -42,12 +42,12 @@ public class ScheduleRepository {
 		sql.append("FROM ");
 		sql.append("schedules ");
 		sql.append("WHERE ");
-		sql.append("user_id=:userId ");
+		sql.append("(user_id=:userId ");
 		sql.append("OR ");
 		sql.append("id IN");
-		sql.append("(SELECT schedule_id FROM share WHERE shared_user_id = :userId) ");
+		sql.append("(SELECT schedule_id FROM share WHERE shared_user_id = :userId)) ");
 		sql.append("AND ");
-		sql.append("deleted = null ");
+		sql.append("deleted is null ");
 		String Sql = sql.toString();
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
 		return template.query(Sql, param, SCHEDULE_ROW_MAPPER);
