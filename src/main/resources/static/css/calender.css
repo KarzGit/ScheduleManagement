@@ -74,32 +74,32 @@ th {
   padding-bottom: 10px;
   text-align: left;
   vertical-align: top;
-  height: 5px;
+  height: 10px;
+  
 }
 .today{
-	background-color:aquamarine;
+	background-color:rgb(255, 127, 131);
 }
 .schedule_area td{
   position:relative;
-  height: 70px;
+  height: 90px;
   border-right: 1px solid #ddd;
   border-top: none;
+  vertical-align:top;
 
 }
+
+
 
 
 .schedule_list{	
   display:inline-block;
-  position: absolute;
-  left:3px;
-  z-index:100;
-  
   color:white;
-  background-color :cyan;
-  margin-bottom:1px;
+  top:0px;
   height:25px;
-  line-height:25px;
+ 
 }
+
 
 
 #next{
@@ -111,3 +111,4 @@ th {
   font-size: 25px;
 
 }
+

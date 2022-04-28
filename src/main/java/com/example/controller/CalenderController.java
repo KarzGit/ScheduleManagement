@@ -81,11 +81,11 @@ public class CalenderController {
 			model.addAttribute("weather", false);
 		}
 
-//		// 仮でUserId=2のユーザーのスケジュールを取得
-//		List<Schedule> scheduleList = calenderService.findByUserId(2);
-//		model.addAttribute("scheduleList", scheduleList);
 
+		
 		return "calender.html";
 	}
+	
 
 }
+

@@ -7,9 +7,11 @@ let month = date.getMonth() + 1
 let month2= ('00'+month).slice(-2) //一桁の数字に0を追加　1→01
 let day = date.getDate()
 let dayCount = 1 // 日にちのカウント
+
 let calenderHtml = '' // HTMLを組み立てる変数
 let schedule_id = document.getElementsByClassName("scheduleList_id")
 let schedule_title = document.getElementsByClassName("scheduleList_title")
+let schedule_kinds = document.getElementsByClassName("scheduleList_kinds")
 let schedule_startDate = document.getElementsByClassName("scheduleList_startDate")
 let schedule_startTime = document.getElementsByClassName("scheduleList_startTime")
 let schedule_endDate = document.getElementsByClassName("scheduleList_endDate")
@@ -82,7 +84,10 @@ document.getElementById('year').placeholder=year
 //カレンダーを表示するメソッド
 function createCalender(year,month){
 month2= ('00'+month).slice(-2) //一桁の数字に0を追加　1→01
+
+
 document.getElementById('calender').innerHTML = ' ';
+
 
 calenderHtml += '<table>'
 calenderHtml += '<tbody id="calenderBody">'
@@ -103,7 +108,9 @@ document.getElementById('calender').innerHTML = calenderHtml;
     const lastMonthEndDate = new Date(year, month - 1, 0) // 前月の最後の日の情報
     const lastMonthendDayCount = lastMonthEndDate.getDate() // 前月の末日
     const startDay = startDate.getDay() // 月の最初の日の曜日を取得
-    let dayCount = 1 // 日にちのカウント
+    let dayCount=1;
+	
+   
     
 	let diffMilliSec = endDate - startDate;
 					/*ミリ秒を日数に変換*/
@@ -119,7 +126,7 @@ document.getElementById('calender').innerHTML = calenderHtml;
         if (w == 0 && d < startDay) {
             // 1行目で1日の曜日の前
             days.appendChild(document.createElement('td'))
-            schedulearea.appendChild(document.createElement('td'))　//スケジュール欄の追加
+            schedulearea.appendChild(document.createElement('td')) //スケジュール欄の追加
         } else if (dayCount > endDayCount) {
             // 末尾の日数を超えた
              days.appendChild(document.createElement('td'))
@@ -127,39 +134,10 @@ document.getElementById('calender').innerHTML = calenderHtml;
         } else {
 	  		let whileDays=document.createElement('td')
 	  		let schedulebox=document.createElement('td')
-	  		whileDays.setAttribute("id",year+'/'+month2+'/'+dayCount)
-	  		schedulebox.setAttribute("id",year+'-'+month2+'-'+dayCount)
-	  		//スケジュール開始日が一致するところに<span>を追加
-	  		let scheduleDocument=document.createElement('span')
-	  		
-	  		for(let i =0; i<schedule_startDate.length; i++){
-			if(schedule_startDate[i].value == schedulebox.getAttribute('id')){
-				//スケジュール期間が複数日に及ぶ場合
-				if(schedule_startDate[i].value != schedule_endDate[i].value){
-					//開始日時
-					let loadDate = new Date(schedule_startDate[i].value);
-					//終了日時
-					let distDate = new Date(schedule_endDate[i].value);
-					//日時の差をミリ秒単位で取得
-					let diffMilliSec = distDate - loadDate;
-					//ミリ秒を日数に変換
-					let diffDays = parseInt(diffMilliSec / 1000 / 60 / 60 / 24);
-					
-					let schedule_period= diffDays+1
-					scheduleDocument.style.width=160*schedule_period+'px';
-					
-				}
-				
-				let scheduleLink = document.createElement('a')
-				scheduleLink.href="http://localhost:8080/scheduleDetail?id="+schedule_id[i].value
-				schedulebox.appendChild(scheduleLink)
-				scheduleDocument.classList.add('schedule_list')
-				scheduleDocument.innerText=schedule_title[i].value　
-				schedulebox.firstElementChild.appendChild(scheduleDocument)
-				
-				
-			}
-	}
+	  		let dayCount2 = ('00'+dayCount).slice(-2)
+	  		whileDays.setAttribute("id",year+'/'+month2+'/'+dayCount2)
+	  		schedulebox.setAttribute("id",year+'-'+month2+'-'+dayCount2)
+
 	  		whileDays.append(dayCount)
 	  		days.appendChild(whileDays)
 	  		schedulearea.appendChild(schedulebox)
@@ -170,7 +148,8 @@ document.getElementById('calender').innerHTML = calenderHtml;
     document.getElementById('calenderBody').appendChild(days)
     document.getElementById('calenderBody').appendChild(schedulearea)
 }
-
+//カレンダーにスケジュールを追加するメソッド
+		addSchedule(year,month)
 };
 
 
@@ -213,7 +192,7 @@ document.getElementById("yearMonthSelector").addEventListener('click',function()
 			const clickDate=new Date(e.target.id);
 			console.log(clickDate.getMonth())
 			document.getElementById('select_date').innerHTML=clickDate.getFullYear()+'年'+(clickDate.getMonth()+1)+'月'+clickDate.getDate()+'日'
-			console.log(e)
+		
 		})
 	})
 
@@ -221,3 +200,111 @@ document.getElementById("yearMonthSelector").addEventListener('click',function()
 };
 
 
+function addSchedule(year,month){
+	
+	let monthlySchedule_id=[]
+	let monthlySchedule_title=[]
+	let monthlySchedule_kinds=[]
+	let monthlySchedule_startDate=[]
+	let monthlySchedule_endDate=[]
+
+	for(let i =0; i<schedule_startDate.length;i++){
+		let startDate = new Date(schedule_startDate[i].value)
+		
+		if(startDate.getMonth()+1 == month && startDate.getFullYear() == year){
+			monthlySchedule_id.push(schedule_id[i])
+			monthlySchedule_title.push(schedule_title[i])
+			monthlySchedule_kinds.push(schedule_kinds[i])
+			monthlySchedule_startDate.push(schedule_startDate[i])
+			monthlySchedule_endDate.push(schedule_endDate[i])
+		}
+	};
+	 
+	//スケジュールをカレンダーに追加する
+
+		for(let i =0; i<monthlySchedule_startDate.length; i++){
+			let scheduleDocument=document.createElement('span')  //スケジュール格納用spanを作成（スケジュールの数分）
+			let scheduleStart=monthlySchedule_startDate[i].value
+			let addScheduleArea = document.getElementById(scheduleStart)  //スケジュール開始日がIDになっているtd要素を取得
+				//開始日時
+				let loadDate = new Date(monthlySchedule_startDate[i].value);
+				//終了日時
+				let distDate = new Date(monthlySchedule_endDate[i].value);
+				//日時の差をミリ秒単位で取得
+				let diffMilliSec = distDate - loadDate;
+				//ミリ秒を日数に変換
+				let diffDays = parseInt(diffMilliSec / 1000 / 60 / 60 / 24);
+				let schedule_period= diffDays+1
+				scheduleDocument.style.width=102*schedule_period+'%';
+
+				//スケジュール日数が複数日の場合
+				if(monthlySchedule_startDate[i].value != monthlySchedule_endDate[i].value){
+						//スケジュールが週を跨ぐ場合（schedule_period スケジュール日数が土曜を超えた場合）
+					if(schedule_period>7-loadDate.getDay()){
+						//土曜日までの長さを設定
+						scheduleDocument.style.width=103*(7-loadDate.getDay())+'%';
+					 //翌週にスケジュールを伸ばす
+						let scheduleEndDateArea=document.getElementById(monthlySchedule_endDate[i].value) //スケジュール最終日を取得
+						let scheduleEndWeekFirstChild = scheduleEndDateArea.parentNode.firstChild  //スケジュール最終日の週の日曜日
+						let longScheduleDocument = document.createElement('span')
+						longScheduleDocument.style.width=103*(distDate.getDay()+1)+'%'; //日曜日から最終日までの長さ設定
+						//スケジュールの種類によって色を変える
+						if(monthlySchedule_kinds[i].value =='仕事'){
+							longScheduleDocument.style.backgroundColor="green";
+						}else if(monthlySchedule_kinds[i].value == 'プライベート'){
+							longScheduleDocument.style.backgroundColor="cyan";
+							}else{
+				longScheduleDocument.style.backgroundColor="#acff7f";
+			}
+
+						let longSchedulelink= document.createElement('a')
+						longSchedulelink.href="http://localhost:8080/scheduleDetail?id="+monthlySchedule_id[i].value
+						scheduleEndWeekFirstChild.appendChild(longSchedulelink)
+						longScheduleDocument.classList.add('schedule_list')
+						longScheduleDocument.innerText=monthlySchedule_title[i].value
+						scheduleEndWeekFirstChild.lastElementChild.appendChild(longScheduleDocument)
+						}
+
+						//空の欄を追加する
+						let nextStartDate=new Date(loadDate.setDate(loadDate.getDate()+1));
+						
+				
+						for(let d=0 ; d<schedule_period-1;d++){
+							if(nextStartDate.getDay() == 0){
+								nextStartDate=new Date(nextStartDate.setDate(nextStartDate.getDate()+1));
+								continue;
+							}
+							let month2= ('00'+(nextStartDate.getMonth()+1)).slice(-2) ;
+							let day2 = ('00'+nextStartDate.getDate()).slice(-2) ;
+							let nextStartDateId=nextStartDate.getFullYear()+'-'+month2+'-'+day2;
+							
+							let airArea=document.createElement('span')
+							airArea.classList.add('schedule_list')
+							document.getElementById(nextStartDateId).insertBefore(airArea,document.getElementById(nextStartDateId).firstChild)
+							nextStartDate=new Date(nextStartDate.setDate(nextStartDate.getDate()+1));
+						}
+
+					}
+
+					
+						
+			let scheduleLink = document.createElement('a')
+			scheduleLink.setAttribute('id',monthlySchedule_id[i].value+'link')
+			scheduleLink.href="http://localhost:8080/scheduleDetail?id="+monthlySchedule_id[i].value
+			addScheduleArea.appendChild(scheduleLink)
+			scheduleDocument.classList.add('schedule_list')
+			scheduleDocument.innerText=monthlySchedule_title[i].value
+			document.getElementById(monthlySchedule_id[i].value+'link').appendChild(scheduleDocument)
+
+			//スケジュールの種類によって色を変える
+			if(monthlySchedule_kinds[i].value =='仕事'){
+				scheduleDocument.style.backgroundColor="green";
+			}else if(monthlySchedule_kinds[i].value == 'プライベート'){
+				scheduleDocument.style.backgroundColor="cyan";
+			}else{
+				scheduleDocument.style.backgroundColor="#acff7f";
+			}
+			
+	}
+
+}
