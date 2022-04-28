@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="mypage.css">
+  <link rel="stylesheet" th:href="@{/css/mypage.css}">
 </head>
 <body>
   <div id="mypage">
     <h4>マイページ</h4>
     <ol>
-      <li><img  id ="user_icon" src="icon_cypress.png" alt="アイコン画像"></li>
-      <li>ユーザー名: <span>test</span></li>
-      <li>郵便番号: <span>1111111</span></li>
-      <li>メールアドレス: <span>test@co.jp</span></li>
-      <li>パスワード:</li>
+      <li><img  id ="user_icon" th:src="@{/img/}+${session.user.iconImagePath}" alt="アイコン画像"></li>
+      <li>ユーザー名: <span th:text="${session.user.name}">test</span></li>
+      <li>郵便番号: <span th:text="${session.user.zipcode}">1111111</span></li>
+      <li>メールアドレス: <span th:text="${session.user.mail}">test@co.jp</span></li>
     </ol>
 
     <button type="submit" id="change_button">変更する</button>
