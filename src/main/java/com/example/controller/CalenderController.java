@@ -1,7 +1,9 @@
 package com.example.controller;
 
 import java.net.URL;
+
 import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import com.example.domain.OpenWeatherMap;
 import com.example.domain.Schedule;
@@ -44,7 +47,7 @@ public class CalenderController {
 			latlonUrl.append("http://api.openweathermap.org/geo/1.0/zip?zip=");
 			latlonUrl.append(user.getZipcode());
 			latlonUrl.append(",jp&appid=");
-			latlonUrl.append(""); // OpenWeatherMapのAPIキー
+			latlonUrl.append("47b34437749aed10cf2c2352f83f735c"); // OpenWeatherMapのAPIキー
 
 			URL preUrl = new URL(latlonUrl.toString());
 			JsonNode latlonDocument = latlonMapper.readTree(preUrl);
@@ -61,7 +64,7 @@ public class CalenderController {
 			weatherUrl.append("&lon=");
 			weatherUrl.append(weatherMap.getLon());
 			weatherUrl.append("&appid=");
-			weatherUrl.append(""); // OpenWeatherMapのAPIキー
+			weatherUrl.append("47b34437749aed10cf2c2352f83f735c"); // OpenWeatherMapのAPIキー
 			weatherUrl.append("&lang=ja&units=metric");
 
 			URL url = new URL(weatherUrl.toString());
@@ -85,7 +88,7 @@ public class CalenderController {
 		
 		return "calender.html";
 	}
-	
+
 
 }
 
