@@ -1,6 +1,9 @@
 package com.example.repository;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,5 +119,38 @@ public class ScheduleRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("deleted", timestamp).addValue("id", id);
 		template.update(sql.toString(),param);
 	}
+	
+	public List<Schedule> getTodaySchedule(Integer userId) {
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String formatDate = sdf.format(today);
+		Date formatDate2=null;
+		try {
+			 formatDate2 = sdf.parse(formatDate);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT ");
+		sql.append("id,user_id,title,description,kinds,start_date,start_time,end_date,end_time ");
+		sql.append("FROM ");
+		sql.append("schedules ");
+		sql.append("WHERE ");
+		sql.append("(user_id=:userId ");
+		sql.append("OR ");
+		sql.append("id IN");
+		sql.append("(SELECT schedule_id FROM share WHERE shared_user_id = :userId)) ");
+		sql.append("AND ");
+		sql.append("start_date = :startDate ");
+		sql.append("AND ");
+		sql.append("deleted is null ");
+		String Sql = sql.toString();
+		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId).addValue("startDate", formatDate2);
+		return template.query(Sql, param, SCHEDULE_ROW_MAPPER);
+
+	}
+	
 
 }
