@@ -4,4 +4,16 @@ spring:
     url: jdbc:postgresql://localhost:5432/scheduleManagement
     username: postgres
     password: postgres
+    
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gettodayschedule@gmail.com
+    password: getTodaySchedule123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+    
 
