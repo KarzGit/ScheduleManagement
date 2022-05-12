@@ -44,7 +44,7 @@
       <button type="submit" id="update">更新する</button>
      
     </form>
-    <form th:action="@{/update/deletedUpdate?id}+${schedule.id}" method="post">
+    <form th:action="@{/update/deletedUpdate?id=}+${schedule.id}" method="post">
      <button type="submit" id="delete">削除する</button>
     </form>
   </div>
