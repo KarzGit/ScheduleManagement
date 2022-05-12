@@ -108,25 +108,24 @@ public class ScheduleRepository {
 	
 	public void deletedUpdate(Integer id) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		System.out.println(timestamp);
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE ");
 		sql.append("schedules ");
 		sql.append("SET ");
 		sql.append("deleted=:deleted ");
 		sql.append("WHERE ");
-		sql.append("id=:id");
+		sql.append("id=:id; ");
 		SqlParameterSource param = new MapSqlParameterSource().addValue("deleted", timestamp).addValue("id", id);
 		template.update(sql.toString(),param);
 	}
 	
-	public List<Schedule> getTodaySchedule(Integer userId) {
-		Date today = new Date();
+	public List<Schedule> getTodaySchedule(Integer userId,String today) {
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String formatDate = sdf.format(today);
+		
 		Date formatDate2=null;
 		try {
-			 formatDate2 = sdf.parse(formatDate);
+			 formatDate2 = sdf.parse(today);
 		} catch (ParseException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

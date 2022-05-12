@@ -35,8 +35,8 @@ public class MailService {
 	
 	
 
-	public List<Schedule> getTodaySchedule(Integer userId){
-		return scheduleRepository.getTodaySchedule(userId);
+	public List<Schedule> getTodaySchedule(Integer userId,String today){
+		return scheduleRepository.getTodaySchedule(userId,today);
 	}
 	
 	
