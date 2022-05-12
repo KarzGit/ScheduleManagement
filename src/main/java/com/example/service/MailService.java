@@ -30,8 +30,7 @@ public class MailService {
 	@Autowired
 	private ScheduleRepository scheduleRepository;
 	
-	@Autowired
-	private ResourceLoader resourceLoader;
+
 	
 	
 
